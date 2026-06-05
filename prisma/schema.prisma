@@ -1,0 +1,137 @@
+// This is your Prisma schema file.
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("admin")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Project {
+  id           Int      @id @default(autoincrement())
+  title        String
+  slug         String   @unique
+  description  String
+  longDesc     String?  @map("long_description")
+  image        String?
+  githubUrl    String?  @map("github_url")
+  liveUrl      String?  @map("live_url")
+  technologies String[] // PostgreSQL array
+  category     String   @default("Full Stack")
+  featured     Boolean  @default(false)
+  order        Int      @default(0)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("projects")
+}
+
+model Blog {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  content     String   // Markdown content
+  excerpt     String?
+  coverImage  String?  @map("cover_image")
+  category    String   @default("General")
+  readTime    Int      @default(5) @map("read_time")
+  published   Boolean  @default(false)
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("blogs")
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("contact_messages")
+}
+
+model SiteSettings {
+  id              Int      @id @default(1)
+  resumeUrl       String?  @map("resume_url")
+  metaTitle       String?  @map("meta_title")
+  metaDesc        String?  @map("meta_desc")
+  heroHeadline    String?  @map("hero_headline")
+  heroSubheadline String?  @map("hero_subheadline")
+  aboutText       String?  @map("about_text")
+  aboutImage      String?  @map("about_image")
+  email           String?
+  phone           String?
+  githubUrl       String?  @map("github_url")
+  twitterUrl      String?  @map("twitter_url")
+  linkedinUrl     String?  @map("linkedin_url")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@map("site_settings")
+}
+
+model Skill {
+  id          Int      @id @default(autoincrement())
+  name        String
+  proficiency Int
+  years       Int
+  icon        String
+  category    String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("skills")
+}
+
+model Experience {
+  id               Int      @id @default(autoincrement())
+  role             String
+  company          String
+  location         String?
+  period           String
+  type             String
+  color            String?
+  description      String
+  responsibilities String[] // PostgreSQL array
+  technologies     String[] // PostgreSQL array
+  order            Int      @default(0)
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@map("experiences")
+}
+
+model Service {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String
+  icon         String   @default("Monitor")
+  color        String   @default("#00D4FF")
+  technologies String[] // PostgreSQL array
+  order        Int      @default(0)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("services")
+}
