@@ -14,6 +14,8 @@ const adminRoutes = require("./routes/admin");
 const skillsRoutes = require("./routes/skills");
 const experienceRoutes = require("./routes/experience");
 const servicesRoutes = require("./routes/services");
+const heroRoutes = require("./routes/hero");
+const aboutRoutes = require("./routes/about");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -72,6 +74,8 @@ app.use("/api/blog", blogRoutes);
 app.use("/api/skills", skillsRoutes);
 app.use("/api/experience", experienceRoutes);
 app.use("/api/services", servicesRoutes);
+app.use("/api/hero", heroRoutes);
+app.use("/api/about", aboutRoutes);
 app.use("/api/settings", require("./routes/settings"));
 app.use("/api/admin", adminRoutes);
 

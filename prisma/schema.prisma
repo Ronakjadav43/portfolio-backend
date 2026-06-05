@@ -135,3 +135,35 @@ model Service {
 
   @@map("services")
 }
+
+model Hero {
+  id           Int      @id @default(autoincrement())
+  title        String   @default("Building\nScalable, Elegant\nWeb Applications")
+  subtitle     String   @default("5+ Years of Experience Delivering Modern Web Solutions")
+  typewriter   String[] // PostgreSQL array
+  stats        Json?    // e.g. [{"n": "5+", "label": "Yrs Exp"}]
+  floatingTech Json?    // e.g. [{"name": "React", "color": "#61DAFB", "x": "-10%", "y": "15%", "delay": 0}]
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("heroes")
+}
+
+model About {
+  id           Int      @id @default(autoincrement())
+  title        String   @default("Passionate About Building Great Software")
+  subtitle     String   @default("I'm a Senior Full Stack Developer who turns complex problems into clean, scalable, beautiful solutions.")
+  name         String   @default("Ronak Jadav")
+  jobTitle     String   @default("Senior Full Stack Developer")
+  location     String   @default("Gujarat, India")
+  aboutText    String   @default("Hi, I'm **Ronak Jadav**, a Senior Full Stack Developer passionate about building high-performance web applications and AI-powered solutions.\n\nI specialize in the complete product lifecycle — from architecture and database design to deployment and optimization. I love working with modern tech stacks and solving complex engineering challenges.")
+  tags         String[] // PostgreSQL array
+  stats        Json?    // e.g. [{"value": 5, "suffix": "+", "label": "Years Experience", "icon": "Calendar"}]
+  milestones   Json?    // e.g. [{"year": "2018", "title": "...", "desc": "...", "color": "#00FF9D", "icon": "🚀"}]
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("about")
+}
